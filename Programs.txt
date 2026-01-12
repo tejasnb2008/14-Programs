@@ -1,0 +1,410 @@
+def fibonacci(n):
+    if n <= 0:
+        print("Please enter a positive integer")
+        return None
+    a, b = 0, 1
+    print("Fibonacci series is:")
+    for i in range(n):
+        print(a, end=" ")
+        a, b = b, a + b
+    print()
+
+num = int(input("Enter a number to generate the Fibonacci series: "))
+fibonacci(num)
+
+
+2.
+def factorial(n):
+    fact = 1
+    for i in range(1, n+1):
+        fact = fact * i
+    return fact
+
+def sum_of_numbers(n):
+    sum = 0
+    for i in range(1, n+1):
+        sum = sum + i
+    return sum
+
+while True:
+    print("Menu:")
+    print("1. Find Factorial")
+    print("2. Find Sum of Numbers")
+    print("3. Exit")
+    choice = int(input("Enter your choice(1/2/3): "))
+    if choice == 1:
+        num = int(input("Enter a number: "))
+        print("Factorial", factorial(num))
+    elif choice == 2:
+        num = int(input("Enter a number: "))
+        print("sum of numbers", sum_of_numbers(num))
+    elif choice == 3:
+        print("Exiting...")
+        break
+    else:
+        print("Invalid choice. Try again!")
+
+
+
+3.
+def simple_interest(p, t, r):
+    si = (p * t * r) / 100
+    return si
+
+def compound_interest(p, t, r):
+    ci = p * ((1 + r/100)**t) - p
+    return ci
+
+p = float(input("Enter principal amount: "))
+t = int(input("Enter time period (in years): "))
+r = float(input("Enter annual interest rate (in %): "))
+
+si = simple_interest(p, t, r)
+ci = compound_interest(p, t, r)
+diff = ci - si
+
+print("Simple Interest", si)
+print("Compound Interest", ci)
+print("Difference between CI and SI:", diff)
+
+
+4.
+def count_characters(filename, content):
+    vowels = "AEIOUaeiou"
+    vowel_count = consonant_count = uppercase_count = lowercase_count = 0
+    
+    try:
+        with open(filename, "w") as file:
+            file.write(content)
+            
+        with open(filename, "r") as file:
+            text = file.read()
+            for char in text:
+                if char.isalpha():
+                    if char in vowels:
+                        vowel_count += 1
+                    else:
+                        consonant_count += 1
+                    if char.isupper():
+                        uppercase_count += 1
+                    else:
+                        lowercase_count += 1
+        print("Vowels:", vowel_count)
+        print("Consonants:", consonant_count)
+        print("Uppercase:", uppercase_count)
+        print("Lowercase:", lowercase_count)
+    except FileNotFoundError:
+        print("File not found.")
+
+filename = input("Enter file name: ")
+content = input("Enter the content to write in the file: ")
+count_characters(filename, content)
+
+5.
+def count_file_details(filename, content):
+    try:
+        with open(filename, "w") as file:
+            file.write(content)
+            
+        with open(filename, "r") as file:
+            text = file.read()
+            lines = text.count("\n") + 1 if text else 0
+            words = len(text.split())
+            characters = len(text)
+            
+            print("Number of lines:", lines)
+            print("Number of words:", words)
+            print("Number of characters:", characters)
+    except FileNotFoundError:
+        print("File not found.")
+
+filename = input("Enter file name: ")
+content = """learning Python is fun
+File handling is useful
+Let's practice more. This is my program."""
+count_file_details(filename, content)
+
+
+8.
+def sort_bubble(list1):
+    length = len(list1)
+    for i in range(length):
+        for j in range(0, length - i - 1):
+            if list1[j] > list1[j + 1]:
+                list1[j], list1[j + 1] = list1[j + 1], list1[j]
+
+list1 = []
+n = int(input("Enter number of elements: "))
+print("Enter the elements:")
+for i in range(n):
+    item = int(input())
+    list1.append(item)
+
+
+9.
+sort_bubble(list1)
+print("The sorted list is:")
+for i in range(len(list1)):
+    print(list1[i], end=" ")
+def sort_selection(list1):
+    length = len(list1)
+    for i in range(length):
+        min_index = i
+        for j in range(i + 1, length):
+            if list1[j] < list1[min_index]:
+                min_index = j
+        list1[i], list1[min_index] = list1[min_index], list1[i]
+
+list1 = []
+n = int(input("Enter number of elements: "))
+print("Enter the elements:")
+for i in range(n):
+    item = int(input())
+    list1.append(item)
+
+sort_selection(list1)
+print("The sorted list is:")
+for num in list1:
+    print(num, end=" ")
+
+
+
+10.
+def insertion_sort(list1):
+    n = len(list1)
+    for i in range(1, n):
+        temp = list1[i]
+        j = i - 1
+        while j >= 0 and temp < list1[j]:
+            list1[j + 1] = list1[j]
+            j = j - 1
+        list1[j + 1] = temp
+
+list1 = []
+n = int(input("Enter number of elements: "))
+print("Enter the elements:")
+for i in range(n):
+    item = int(input())
+    list1.append(item)
+
+insertion_sort(list1)
+print("The sorted list is:")
+for i in list1:
+    print(i, end=" ")
+
+11.
+def linear_search(list1, key):
+    for i in range(len(list1)):
+        if list1[i] == key:
+            return i
+    return None
+
+list1 = []
+n = int(input("Enter number of elements: "))
+print("Enter the elements:")
+for i in range(n):
+    item = int(input())
+    list1.append(item)
+
+print("The list contents are:", list1)
+key = int(input("Enter the number to be searched: "))
+pos = linear_search(list1, key)
+
+if pos is None:
+    print(key, "is not found in the list")
+else:
+    print(key, "is found at position", pos + 1)
+
+12.
+def binary_search(list1, key):
+    first = 0
+    last = len(list1) - 1
+    while first <= last:
+        mid = (first + last) // 2
+        if list1[mid] == key:
+            return mid
+        elif key > list1[mid]:
+            first = mid + 1
+        else:
+            last = mid - 1
+    return None
+
+list1 = []
+n = int(input("Enter number of elements: "))
+print("Enter the elements (in ascending order):")
+for i in range(n):
+    item = int(input())
+    list1.append(item)
+
+print("The list contents are:", list1)
+key = int(input("Enter the num to be searched: "))
+pos = binary_search(list1, key)
+
+if pos is None:
+    print(key, "is not found")
+else:
+    print(key, "is found at position", pos + 1)
+
+13.
+stack = []
+
+def push(stack, item):
+    stack.append(item)
+    print("Item pushed to stack")
+
+def pop(stack):
+    if len(stack) == 0:
+        print("Stack is empty (Underflow)")
+    else:
+        item = stack.pop()
+        print("Popped item is:", item)
+
+def display(stack):
+    if len(stack) == 0:
+        print("Stack is empty")
+    else:
+        print("Stack elements are:")
+        for i in range(len(stack)-1, -1, -1):
+            print(stack[i])
+
+while True:
+    print("\n1. PUSH\n2. POP\n3. DISPLAY\n4. EXIT")
+    choice = int(input("Enter your choice: "))
+    if choice == 1:
+        item = int(input("Enter item to push: "))
+        push(stack, item)
+    elif choice == 2:
+        pop(stack)
+    elif choice == 3:
+        display(stack)
+    elif choice == 4:
+        break
+    else:
+        print("Invalid choice")
+
+14.
+queue = []
+
+def enqueue(queue, item):
+    queue.append(item)
+    print("Item added to queue")
+
+def dequeue(queue):
+    if len(queue) == 0:
+        print("Queue is empty (Underflow)")
+    else:
+        item = queue.pop(0)
+        print("Removed item is:", item)
+
+def display(queue):
+    if len(queue) == 0:
+        print("Queue is empty")
+    else:
+        print("Queue elements are:")
+        for i in queue:
+            print(i, end=" ")
+        print()
+
+while True:
+    print("\n1. ENQUEUE\n2. DEQUEUE\n3. DISPLAY\n4. EXIT")
+    choice = int(input("Enter your choice: "))
+    if choice == 1:
+        item = int(input("Enter item to add: "))
+        enqueue(queue, item)
+    elif choice == 2:
+        dequeue(queue)
+    elif choice == 3:
+        display(queue)
+    elif choice == 4:
+        break
+    else:
+        print("Invalid choice")
+
+
+
+MYSQL 
+1.
+-- Creating the table
+CREATE TABLE BESCOM (
+    RRNO VARCHAR(10) PRIMARY KEY,
+    CUSTNAME VARCHAR(25) NOT NULL,
+    BILLDATE DATE,
+    UNITS INT(4)
+);
+
+-- Inserting 10 sample records
+INSERT INTO BESCOM VALUES ('R101', 'Amit', '2025-01-01', 80);
+INSERT INTO BESCOM VALUES ('R102', 'Basu', '2025-01-01', 150);
+INSERT INTO BESCOM VALUES ('R103', 'Chetan', '2025-01-02', 200);
+INSERT INTO BESCOM VALUES ('R104', 'Deepa', '2025-01-02', 50);
+INSERT INTO BESCOM VALUES ('R105', 'Eshwar', '2025-01-03', 120);
+INSERT INTO BESCOM VALUES ('R106', 'Farhan', '2025-01-03', 300);
+INSERT INTO BESCOM VALUES ('R107', 'Gita', '2025-01-04', 90);
+INSERT INTO BESCOM VALUES ('R108', 'Harsh', '2025-01-04', 110);
+INSERT INTO BESCOM VALUES ('R109', 'Indu', '2025-01-05', 40);
+INSERT INTO BESCOM VALUES ('R110', 'Javed', '2025-01-05', 250);
+
+
+
+2. Required Queries
+View structure of table: DESC BESCOM;
+
+List all the records: SELECT * FROM BESCOM;
+
+Add a new field for bill amount: ALTER TABLE BESCOM ADD BILLAMT DECIMAL(10,2);
+
+Compute the bill amount:
+
+
+-- Rule: Minimum 100, first 100 units @ 7.50, above 100 @ 8.50
+UPDATE BESCOM SET BILLAMT = 100 WHERE UNITS <= 13;
+UPDATE BESCOM SET BILLAMT = UNITS * 7.50 WHERE UNITS > 13 AND UNITS <= 100;
+UPDATE BESCOM SET BILLAMT = (100 * 7.50) + (UNITS - 100) * 8.50 WHERE UNITS > 100;
+
+Display maximum, minimum and total bill amount: SELECT MAX(BILLAMT), MIN(BILLAMT), SUM(BILLAMT) FROM BESCOM;
+
+List bills in sorted order based on RRNO: SELECT * FROM BESCOM ORDER BY RRNO;
+
+
+B3) Entity Name: student
+This program manages student information and combinations.
+
+1. Create Table and Insert Records
+SQL
+
+-- Creating the table
+CREATE TABLE student (
+    Rollno INT(5) PRIMARY KEY,
+    Sname VARCHAR(15) NOT NULL,
+    DOB DATE,
+    Gender CHAR(1),
+    Combn VARCHAR(5),
+    Class CHAR(6)
+);
+
+-- Inserting 10 sample records
+INSERT INTO student VALUES (1, 'Abhi', '2008-06-15', 'M', 'PCMB', 'I PUC');
+INSERT INTO student VALUES (2, 'Bhavya', '2007-05-20', 'F', 'BASC', 'II PUC');
+INSERT INTO student VALUES (3, 'Charan', '2008-06-10', 'M', 'CEBA', 'I PUC');
+INSERT INTO student VALUES (4, 'Divya', '2007-08-12', 'F', 'PCMC', 'II PUC');
+INSERT INTO student VALUES (5, 'Esha', '2008-02-25', 'F', 'BASC', 'I PUC');
+INSERT INTO student VALUES (6, 'Faraz', '2007-06-01', 'M', 'PCMB', 'II PUC');
+INSERT INTO student VALUES (7, 'Ganesh', '2008-12-30', 'M', 'CEBA', 'I PUC');
+INSERT INTO student VALUES (8, 'Hina', '2007-11-14', 'F', 'BASC', 'II PUC');
+INSERT INTO student VALUES (9, 'Irfan', '2008-03-22', 'M', 'PCMC', 'I PUC');
+INSERT INTO student VALUES (10, 'Jaya', '2007-06-18', 'F', 'CEBA', 'II PUC');
+2. Required Queries
+(i) List all the students: SELECT * FROM student;
+
+(ii) List students in BASC and CEBA combination: SELECT * FROM student WHERE Combn IN ('BASC', 'CEBA');
+
+(iii) List only the combinations by removing duplicate values: SELECT DISTINCT Combn FROM student;
+
+(iv) List the students alphabetically: SELECT * FROM student ORDER BY Sname;
+
+(v) List students alphabetically and class-wise: SELECT * FROM student ORDER BY Class, Sname;
+
+(vi) List students born in the month of June of any year: SELECT * FROM student WHERE MONTH(DOB) = 6;
+
+(vii) Count the number of students Gender-wise: SELECT Gender, COUNT(*) FROM student GROUP BY Gender;
+
