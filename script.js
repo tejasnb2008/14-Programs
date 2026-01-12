@@ -1,5 +1,7 @@
-const base =
-  "https://cdn.jsdelivr.net/gh/tejasnb2008/14-Programs@main/programs/";
+const raw =
+"https://raw.githubusercontent.com/tejasnb2008/14-Programs/main/programs/";
+
+const proxy = "/.netlify/functions/fetch?url=";
 
 const files = [
   "program_1.py",
@@ -21,7 +23,7 @@ const files = [
 const container = document.getElementById("container");
 
 files.forEach((file, i) => {
-  fetch(base + file)
+  fetch(proxy + encodeURIComponent(raw + file))
     .then(r => r.text())
     .then(code => {
       const box = document.createElement("div");
@@ -30,10 +32,9 @@ files.forEach((file, i) => {
       box.innerHTML = `
         <h3>${i + 1}. ${file}</h3>
         <pre>${code}</pre>
-        <a class="btn" href="${base + file}" download>Download</a>
+        <a class="btn" href="${raw + file}" download>Download</a>
       `;
 
       container.appendChild(box);
-    })
-    .catch(err => console.log("Failed:", file));
+    });
 });
