@@ -1,5 +1,5 @@
 const base =
-  "https://raw.githubusercontent.com/tejasnb2008/14-Programs/main/programs/";
+  "https://cdn.jsdelivr.net/gh/tejasnb2008/14-Programs@main/programs/";
 
 const files = [
   "program_1.py",
@@ -20,27 +20,20 @@ const files = [
 
 const container = document.getElementById("container");
 
-files.forEach((file, index) => {
+files.forEach((file, i) => {
   fetch(base + file)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("File not found");
-      }
-      return res.text();
-    })
-    .then((code) => {
+    .then(r => r.text())
+    .then(code => {
       const box = document.createElement("div");
       box.className = "box";
 
       box.innerHTML = `
-        <h3>${index + 1}. ${file}</h3>
+        <h3>${i + 1}. ${file}</h3>
         <pre>${code}</pre>
-        <a class="btn" href="${base + file}" download="${file}">Download</a>
+        <a class="btn" href="${base + file}" download>Download</a>
       `;
 
       container.appendChild(box);
     })
-    .catch((err) => {
-      console.error("Failed to load:", file, err);
-    });
+    .catch(err => console.log("Failed:", file));
 });
