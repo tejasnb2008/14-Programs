@@ -1,48 +1,71 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  font-family: Arial;
-  background:#0f172a;
-  color:white;
-  text-align:center;
+  background: linear-gradient(135deg, #020617, #020617);
+  color: #e5e7eb;
+  font-family: Arial, sans-serif;
 }
 
-.container {
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap:20px;
-  padding:20px;
+/* HEADER */
+header {
+  text-align: center;
+  padding: 25px;
 }
 
-.box {
-  background:#1e293b;
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 0 15px #000;
+header h1 {
+  font-size: 26px;
+  margin-bottom: 8px;
 }
 
-pre {
-  background:black;
-  padding:10px;
-  height:200px;
-  overflow:auto;
-  color:#00ff99;
+header p {
+  opacity: 0.7;
+  margin-bottom: 15px;
 }
 
-.btn {
-  display:block;
-  background:#22c55e;
-  padding:10px;
-  color:black;
-  text-decoration:none;
-  border-radius:8px;
-  margin-top:10px;
-}
-
+/* Download all */
 .download-all {
-  background:#38bdf8;
-  padding:12px;
-  color:black;
-  border-radius:10px;
-  text-decoration:none;
-  display:inline-block;
-  margin:20px;
+  background: linear-gradient(45deg, #22c55e, #4ade80);
+  color: #022c22;
+  padding: 12px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
 }
+
+/* CONTAINER */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* PROGRAM CARD */
+.box {
+  background: #020617;
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title */
+.box h3 {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Code window */
+pre {
+  background: #000;
+  color: #22c55e;
+  padding: 12px;
+  border-radius: 10px;
+  font
