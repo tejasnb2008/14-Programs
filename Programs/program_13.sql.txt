@@ -1,0 +1,83 @@
+-- Creating the table
+CREATE TABLE BESCOM (
+    RRNO VARCHAR(10) PRIMARY KEY,
+    CUSTNAME VARCHAR(25) NOT NULL,
+    BILLDATE DATE,
+    UNITS INT(4)
+);
+
+-- Inserting 10 sample records
+INSERT INTO BESCOM VALUES ('R101', 'Amit', '2025-01-01', 80);
+INSERT INTO BESCOM VALUES ('R102', 'Basu', '2025-01-01', 150);
+INSERT INTO BESCOM VALUES ('R103', 'Chetan', '2025-01-02', 200);
+INSERT INTO BESCOM VALUES ('R104', 'Deepa', '2025-01-02', 50);
+INSERT INTO BESCOM VALUES ('R105', 'Eshwar', '2025-01-03', 120);
+INSERT INTO BESCOM VALUES ('R106', 'Farhan', '2025-01-03', 300);
+INSERT INTO BESCOM VALUES ('R107', 'Gita', '2025-01-04', 90);
+INSERT INTO BESCOM VALUES ('R108', 'Harsh', '2025-01-04', 110);
+INSERT INTO BESCOM VALUES ('R109', 'Indu', '2025-01-05', 40);
+INSERT INTO BESCOM VALUES ('R110', 'Javed', '2025-01-05', 250);
+
+
+
+2. Required Queries
+View structure of table: DESC BESCOM;
+
+List all the records: SELECT * FROM BESCOM;
+
+Add a new field for bill amount: ALTER TABLE BESCOM ADD BILLAMT DECIMAL(10,2);
+
+Compute the bill amount:
+
+
+-- Rule: Minimum 100, first 100 units @ 7.50, above 100 @ 8.50
+UPDATE BESCOM SET BILLAMT = 100 WHERE UNITS <= 13;
+UPDATE BESCOM SET BILLAMT = UNITS * 7.50 WHERE UNITS > 13 AND UNITS <= 100;
+UPDATE BESCOM SET BILLAMT = (100 * 7.50) + (UNITS - 100) * 8.50 WHERE UNITS > 100;
+
+Display maximum, minimum and total bill amount: SELECT MAX(BILLAMT), MIN(BILLAMT), SUM(BILLAMT) FROM BESCOM;
+
+List bills in sorted order based on RRNO: SELECT * FROM BESCOM ORDER BY RRNO;
+
+
+B3) Entity Name: student
+This program manages student information and combinations.
+
+1. Create Table and Insert Records
+SQL
+
+-- Creating the table
+CREATE TABLE student (
+    Rollno INT(5) PRIMARY KEY,
+    Sname VARCHAR(15) NOT NULL,
+    DOB DATE,
+    Gender CHAR(1),
+    Combn VARCHAR(5),
+    Class CHAR(6)
+);
+
+-- Inserting 10 sample records
+INSERT INTO student VALUES (1, 'Abhi', '2008-06-15', 'M', 'PCMB', 'I PUC');
+INSERT INTO student VALUES (2, 'Bhavya', '2007-05-20', 'F', 'BASC', 'II PUC');
+INSERT INTO student VALUES (3, 'Charan', '2008-06-10', 'M', 'CEBA', 'I PUC');
+INSERT INTO student VALUES (4, 'Divya', '2007-08-12', 'F', 'PCMC', 'II PUC');
+INSERT INTO student VALUES (5, 'Esha', '2008-02-25', 'F', 'BASC', 'I PUC');
+INSERT INTO student VALUES (6, 'Faraz', '2007-06-01', 'M', 'PCMB', 'II PUC');
+INSERT INTO student VALUES (7, 'Ganesh', '2008-12-30', 'M', 'CEBA', 'I PUC');
+INSERT INTO student VALUES (8, 'Hina', '2007-11-14', 'F', 'BASC', 'II PUC');
+INSERT INTO student VALUES (9, 'Irfan', '2008-03-22', 'M', 'PCMC', 'I PUC');
+INSERT INTO student VALUES (10, 'Jaya', '2007-06-18', 'F', 'CEBA', 'II PUC');
+2. Required Queries
+(i) List all the students: SELECT * FROM student;
+
+(ii) List students in BASC and CEBA combination: SELECT * FROM student WHERE Combn IN ('BASC', 'CEBA');
+
+(iii) List only the combinations by removing duplicate values: SELECT DISTINCT Combn FROM student;
+
+(iv) List the students alphabetically: SELECT * FROM student ORDER BY Sname;
+
+(v) List students alphabetically and class-wise: SELECT * FROM student ORDER BY Class, Sname;
+
+(vi) List students born in the month of June of any year: SELECT * FROM student WHERE MONTH(DOB) = 6;
+
+(vii) Count the number of students Gender-wise: SELECT Gender, COUNT(*) FROM student GROUP BY Gender;
