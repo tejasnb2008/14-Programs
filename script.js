@@ -1,11 +1,19 @@
-const files = [
-  "fibonacci.py","factorial_sum.py","interest.py","file_vowels.py",
-  "file_details.py","bubble_sort.py","selection_sort.py","insertion_sort.py",
-  "linear_search.py","binary_search.py","stack.py","queue.py","bescom.sql","student.sql"
-];
+const total = 14;
+const container = document.getElementById("container");
 
-files.forEach((file,i)=>{
-  fetch("programs/"+file)
-    .then(r=>r.text())
-    .then(t=> document.getElementById("p"+(i+1)).textContent=t );
-});
+for (let i = 1; i <= total; i++) {
+  fetch(`programs/program_${i}.${i==13||i==14?"sql":"py"}`)
+    .then(r => r.text())
+    .then(code => {
+      const box = document.createElement("div");
+      box.className = "box";
+
+      box.innerHTML = `
+        <h3>Program ${i}</h3>
+        <pre>${code}</pre>
+        <a class="btn" href="programs/program_${i}.${i==13||i==14?"sql":"py"}" download>Download</a>
+      `;
+
+      container.appendChild(box);
+    });
+}
